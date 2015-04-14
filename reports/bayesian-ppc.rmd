@@ -1,0 +1,154 @@
+
+
+```{r setup}
+library(knitr)
+opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r load_data, message=FALSE}
+library(ProjectTemplate); load.project()
+set.seed(1234)
+source('jags/jags-data-model.r')
+
+# create test dataset
+w10 <- rcases[rcases$waves_completed >= 9, "user_id"]
+w10 <- sample(w10, 30)
+cclong10 <- cclong[ cclong$user_id %in% w10, ]
+
+
+# analysis_mode is used to control
+# configuration can be passed using the makefile
+# quick: used to test functionality
+# standard: used to get reasonable answer to question
+# publication: used for publication quality output
+if(!exists("analysis_mode")) analysis_mode <- "quick"
+settings <- set_analysis(analysis_mode)
+
+if (analysis_mode == "quick") {
+    DATASET <- cclong10
+    settings <- list(n.chains= 1,  n.adapt= 100, burnin = 10, n.iter= 10, thin=1)
+}
+if (analysis_mode == "standard") {
+    DATASET <- cclong
+    settings <- list(n.chains= 1,  n.adapt= 500, burnin = 4000, n.iter= 1000, thin=10)
+}
+if (analysis_mode == "publication") {
+    DATASET <- cclong
+    settings <- list(n.chains= 1,  n.adapt= 1000, burnin = 5000, n.iter= 10000, thin=10)
+}
+```
+
+
+## Posterior predictive checks
+```{r ppcs}
+source('lib/jags-functions.r')
+source('jags/jags-data-model.r')
+source('jags/posterior-predictive-checks.r')
+
+
+# taking from main model chunk 
+ppc_specifications <- expand.grid(random_error = c(FALSE, TRUE),  
+                                    linear_quadratic = c(FALSE, TRUE), 
+                                    lag_effect =  c(FALSE, TRUE),
+                                    dv=c("pwi_mean", "pwi_mean_probit"),
+                                    stringsAsFactors=FALSE)
+ppc_specifications$id <- seq(nrow(ppc_specifications))
+ppc_specifications$name <- with(ppc_specifications, paste0(ifelse(random_error, "rerr", "ferr"), "_", 
+                                                               ifelse(lag_effect, "lagTR", "lagFA"), "_", 
+                                                               ifelse(linear_quadratic, "linquad", "int"), "_",
+                                                               dv))
+ppc_specifications$transformed <- ppc_specifications$dv == "pwi_mean_probit"
+
+# ppc_specifications
+
+
+fit_ppc_models <- function(i, data=DATASET) {
+    cat("\n", i,":", ppc_specifications[i, "name"], "\n")
+    jagsdata <- get_data(data=data, dv = ppc_specifications[i,"dv"])
+    
+    script <- jags_model(random_error =  ppc_specifications[i, "random_error"],
+                        linear_quadratic = ppc_specifications[i, "linear_quadratic"],
+                        lag_effect = ppc_specifications[i, "lag_effect"],
+                        yhat = TRUE, 
+                        transformed = ppc_specifications[i, "transformed"])
+    
+    agefit <- lm(y ~ age + I(age^2) + I(age^3),  data.frame(y=jagsdata$jagsdata$y, age=jagsdata$jagsdata$age))
+    
+    posterior_predictive_check_pwi(jagsmodel=script$script, 
+                                    jagsdata = jagsdata$jagsdata,
+                                    rawdata = jagsdata$Data,
+                                    transformed = ppc_specifications[i, "transformed"],
+                                   inits = list(mu_beta_intercept = mean(jagsdata$jagsdata$y),
+                           sigma_fixed_y = mean(sapply(split(jagsdata$jagsdata$y, jagsdata$jagsdata$subject), sd)),
+                          mu_beta_sigma = log(mean(sapply(split(jagsdata$jagsdata$y, jagsdata$jagsdata$subject), sd))),
+                          mu_beta_lag = 0.2,
+                             theta_age_linear = coef(agefit)['age'],
+                             theta_age_quadratic = coef(agefit)['I(age^2)'],
+                             theta_age_cubic = coef(agefit)['I(age^3)'] 
+                    ))
+}
+
+# test <- lapply(as.list(seq(nrow(ppc_specifications))), function(X) fit_ppc_models(X))
+# predictive_checks <-  lapply(as.list(seq(nrow(ppc_specifications))), function(X) fit_ppc_models(X))
+cl <- makeCluster(detectCores() - 1, type="FORK", outfile="output/cluster-output.txt")
+predictive_checks <- parLapply(cl, as.list(seq(nrow(ppc_specifications))), function(X) fit_ppc_models(X))
+stopCluster(cl)
+names(predictive_checks) <- ppc_specifications$name
+save(predictive_checks, file="output/predictive_checks.rdata")
+
+
+# create the summary table for posterior predictive checks 
+specify_decimal <- function(x, k) format(round(x, k), nsmall=k)
+extract_checks <- function(statistics_summary, statistics, digits=2) {
+    combine_formatted <- function(x, digits) {
+        formatted <- specify_decimal(x, digits)
+        paste0(formatted['mean'], '\n', '(', formatted['low95'], ' - ', 
+               formatted['high95'], ')',
+               '\n', 'p=', formatted['pvalue'])
+    }
+
+    statistics_summary <- statistics_summary[,statistics]
+    sapply(colnames(statistics_summary), 
+           function(X) combine_formatted(statistics_summary[, X], digits))
+}
+
+predictive_checks_table <- sapply(predictive_checks, function(X) 
+    extract_checks(X$summary_statistics, colnames(X$summary_statistics))
+    )
+
+dataset1 <- specify_decimal(predictive_checks[[1]]$summary_statistics['dataset', ], 2)
+predictive_checks_table <- cbind(dataset1,  predictive_checks_table)
+
+write.csv(predictive_checks_table, 'output/predictive_checks_table.csv')
+# load("output/predictive-checks-20-jan.rdata")
+
+
+dput(list(date=date(), settings=settings), file="output/predictive_checks_settings.txt")
+
+
+
+# changes this for dataset
+# sink('output/predictive-check-output.txt')
+# cat('Average p-value on posterior predictive checks')
+# pcp <- sapply(lapply(predictive_checks, function(X) X$summary_statistics), function(X) X['pvalue', ])
+# pcp_mean <- apply(pcp, 2, mean)
+# pcp_f <- cbind(toupper(names(pcp_mean)),  round(pcp_mean, 2))
+# paste(pcp_f[,1], pcp_f[,2], sep='=', collapse=', ')
+# cat('\n\n')
+# 
+# cat('Log of productive of p-values on posterior predictive checks')
+# pcp_log <- apply(pcp, 2, function(X) sum(log(X)))
+# pcp_log <- cbind(toupper(names(pcp_log)),  round(pcp_log, 2))
+# paste(pcp_log[,1], pcp_log[,2], sep='=', collapse=', ')
+# cat('\n\n')
+# 
+# sink()
+
+ppc_short_table <- data.frame(
+    dataset = predictive_checks[[1]]$summary_statistics['dataset', ],
+  sapply(predictive_checks, function(X) X$summary_statistics['mean',])
+  )
+
+write.csv(ppc_short_table, file="output/ppc_short_table.csv")
+```
+

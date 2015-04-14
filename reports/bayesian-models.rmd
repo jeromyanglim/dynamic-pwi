@@ -1,0 +1,208 @@
+# Set up data
+```{r setup}
+library(knitr)
+opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r load_data, message=FALSE}
+library(ProjectTemplate); load.project()
+# set.seed(1234)
+source('jags/jags-data-model.r')
+
+# create test dataset
+w10 <- rcases[rcases$waves_completed >= 9, "user_id"]
+w10 <- sample(w10, 30)
+cclong10 <- cclong[ cclong$user_id %in% w10, ]
+
+
+# analysis_mode is used to control
+# configuration can be passed using the makefile
+# quick: used to test functionality
+# standard: used to get reasonable answer to question
+# publication: used for publication quality output
+if(!exists("analysis_mode")) analysis_mode <- "quick"
+settings <- set_analysis(analysis_mode)
+
+
+if (analysis_mode == "quick") {
+    settings$n.chains <- 2
+    DATASET <- cclong10
+}
+if (analysis_mode == "standard") {
+    DATASET <- cclong
+    settings <- list(n.chains= 2,  n.adapt= 500, burnin = 4000, n.iter= 1000, thin=1) # around 1 hour - multicore
+}
+if (analysis_mode == "publication") {
+    DATASET <- cclong
+    settings <- list(n.chains= 4,  n.adapt= 500, burnin = 5000, n.iter= 5000, thin=1) # around 2 hours - multicore
+}
+
+```
+
+## Paper analyses
+```{r main_models}
+# debugonce(get_data)
+# if(basename(getwd()) == "reports") setwd("..") # necessary to work with projecttemplate
+source('jags/jags-data-model.r')
+
+model_specifications <- expand.grid(random_error = c(FALSE, TRUE), 
+                                    linear_quadratic = c(FALSE, TRUE), 
+                                    lag_effect =  c(FALSE, TRUE),
+                                    dv=c("pwi_mean", "pwi_mean_probit"),
+                                    stringsAsFactors=FALSE)
+model_specifications$transformed <- model_specifications$dv == "pwi_mean_probit"
+model_specifications$id <- seq(nrow(model_specifications))
+model_specifications$name <- with(model_specifications, paste0(ifelse(random_error, "rerr", "ferr"), "_", 
+                                                               ifelse(lag_effect, "lagTR", "lagFA"), "_", 
+                                                               ifelse(linear_quadratic, "linquad", "int"), "_",
+                                                               dv))
+
+
+fit_jags_model <- function(i, dataset=DATASET, spec = model_specifications, ...) {
+    model_name <- spec[i, 'name']
+    print(model_name)
+    data <- get_data(dv=spec[i, 'dv'], data=dataset) # UPDATE cclong10 for final analysis
+    
+    script <- jags_model(random_error = spec[i, 'random_error'], 
+                         # lag = model_specifications[i, 'lag'], 
+                         linear_quadratic = spec[i, 'linear_quadratic'], 
+                         lag_effect = spec[i, 'lag_effect'],
+                         yhat=FALSE, deviance=TRUE, age_effect = TRUE,
+                         transformed = spec[i, 'transformed')
+    agefit <- lm(y ~ age + I(age^2) + I(age^3),  data.frame(y=data$jagsdata$y, age=data$jagsdata$age))
+    
+    run_jags(script$script, data$jagsdata, script$parameters, dic.run=TRUE, 
+             plots.file=paste0("output/", model_name, ".pdf"), 
+             inits = list(mu_beta_intercept = mean(data$jagsdata$y),
+                           sigma_fixed_y = mean(sapply(split(data$jagsdata$y, data$jagsdata$subject), sd)),
+                          mu_beta_sigma = log(mean(sapply(split(data$jagsdata$y, data$jagsdata$subject), sd))),
+                          mu_beta_lag = 0.2 ,    
+                          theta_age_linear = coef(agefit)['age'],
+                             theta_age_quadratic = coef(agefit)['I(age^2)'],
+                             theta_age_cubic = coef(agefit)['I(age^3)'] 
+                    ) , 
+             ...)
+}
+
+
+# lapply(as.list(seq(nrow(model_specifications))), function(X) fit_jags_model(X,  showplots=FALSE, showsamples=FALSE))
+cl <- makeCluster(detectCores() - 1, type="FORK", outfile="output/cluster-output.txt")
+fits <- parLapply(cl, as.list(seq(nrow(model_specifications))), function(X) fit_jags_model(X, 
+                                   showplots=FALSE, showsamples=FALSE))
+stopCluster(cl)
+names(fits) <- model_specifications$name
+dput(settings, file = "output/model_settings.txt")
+
+# debugonce(fit_jags_model)
+# fit_jags_model(16,  showplots=TRUE, showsamples=TRUE)
+# fits <- lapply(as.list(seq(nrow(model_specifications))), function(X) fit_jags_model(X,  showplots=TRUE, showsamples=TRUE))
+# names(fits) <- model_specifications$name
+# 
+
+save(fits, file="output/model-fits.rdata")
+#  load(file="output/model-fits.rdata")
+fit <- fits[[1]]
+summary(fit$samples)
+    
+sfits <- lapply(fits, function(X) summary(X$samples))
+
+# i <- 1
+# i <- i + 1
+# hist(combine.mcmc(fits[[1]]$samples)[,'deviance_y'], main=i)
+
+# linear model of factors predicting deviance
+# t1 <- data.frame(median=cbind(sapply(fits, function(X) median(combine.mcmc(X$samples)[,'deviance_y']))),
+#           mean=cbind(sapply(fits, function(X) mean(combine.mcmc(X$samples)[,'deviance_y']))))
+# t1 <- data.frame(model_specifications, t1)
+# lm(mean ~ random_error + dv +  linear_quadratic, t1)
+
+
+
+# export parameter estimates
+sumfits <- sapply(fits, function(X)  summary_table_posterior(X$samples, digits = 5))
+sumfits <- lapply(sumfits, as.data.frame)
+
+for (i in seq(sumfits)) {
+    sumfits[[i]]$name <- names(sumfits)[i]
+    sumfits[[i]]$predictor <- row.names(sumfits[[i]])
+}
+
+sumfits <- do.call(rbind, sumfits)
+write.csv(sumfits, file="output/parameter_estimates.csv")
+
+# dic and deviance table 
+dic_table <- t(cbind(round(sapply(fits, function(X) get_dic(X$dic)))))
+write.csv(dic_table, file="output/dic_table.csv")
+# cbind(sapply(sfits, function(X) round(X$statistics['deviance_y', 'Mean'])))
+
+
+```
+
+# explore model fits
+```{r eval=FALSE}
+# load(file="output/model-fits.rdata")
+library(runjags)
+library(coda)
+
+cfits <- lapply(fits, function(X) round(cor(combine.mcmc(X$samples)),2))
+
+x <- fits$rerr_lagTR_linquad_pwi_mean_probit$samples
+x <- fits$ferr_lagTR_linquad_pwi_mean_probit$samples
+plot(x)
+gelman.plot(x, ask = FALSE)
+effectiveSize(x)
+acfplot(x)
+rejectionRate(x)
+gelman.diag(x)
+geweke.diag(x)
+geweke.plot(x, ask=FALSE)
+raftery.diag(x)
+heidel.diag(x)
+
+get_dev <- function(x, STAT=median) {
+    cx <- combine.mcmc(x)
+    STAT((cx[,"deviance_y"]))
+}
+
+cbind(sapply(fits, function(X) get_dev(X$samples, STAT=mean)))
+
+fits$rerr_lagTR_linquad_pwi_mean_probit$dic
+
+
+
+```
+
+
+
+
+# Explore updated models
+
+```{r updated_analysis}
+# # explore for update
+# source("jags/jags-data-model.r")
+# settings <- set_analysis("quick")
+# # settings <- set_analysis("standard")
+# 
+# jm <- jags_model(random_error = TRUE, lag = "fixed", linear_quadratic = FALSE)
+# # dput(jm$parameters)
+# # cat(jm$script, file="jags/n1.jags")
+# 
+# # debugonce(get_data)
+# data <- get_data(dv="pwi_mean", data=cclong10) # UPDATE cclong10 for final analysis
+# str(data)
+# 
+# fit <- run_jags("jags/n1.jags", data$jagsdata, 
+#                 c("mu_beta_intercept", "sigma_beta_intercept", "deviance_y", 
+#                     "mu_beta_sigma", "sigma_beta_sigma", "mean_sigma_y", "sd_sigma_y", 
+#                   #    "mu_beta_linear", "mu_beta_quadratic", 
+#                   "theta_age_linear", "theta_age_quadratic", "theta_age_cubic",
+#                     "rho_14", "mu_beta_lag") , dic.run=FALSE)
+# 
+# 
+# scr <- jags_model(random_error = FALSE, yhat = FALSE, linear_quadratic = FALSE, transformed = FALSE)
+# line_num_cat(scr$script)
+# data <- get_data(dv="pwi_mean", data=cclong10) # UPDATE cclong10 for final analysis
+# fit <- run_jags(scr$script, data$jagsdata,  scr$parameters, dic.run=FALSE)
+
+```
+

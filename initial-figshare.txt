@@ -1,0 +1,6 @@
+Bayesian Hierarchical Modeling of the Temporal Dynamics of Wellbeing
+
+Paper is currently under review. Data and code will be migrated here after publication.
+Currently, data and code is located at:
+
+https://github.com/jeromyanglim/dynamic-pwi

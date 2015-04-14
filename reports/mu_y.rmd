@@ -1,0 +1,162 @@
+# Initialise Project
+```{r setup}
+library(knitr)
+opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r}
+library(ProjectTemplate); load.project()
+source('jags/jags-data-model.r')
+
+# create test dataset
+w10 <- rcases[rcases$waves_completed >= 9, "user_id"]
+w10 <- sample(w10, 30)
+cclong10 <- cclong[ cclong$user_id %in% w10, ]
+
+
+# analysis_mode is used to control
+# configuration can be passed using the makefile
+# quick: used to test functionality
+# standard: used to get reasonable answer to question
+# publication: used for publication quality output
+if(!exists("analysis_mode")) analysis_mode <- "quick"
+settings <- set_analysis(analysis_mode)
+
+
+if (analysis_mode == "quick") {
+    settings$n.chains <- 2
+    DATASET <- cclong10
+}
+if (analysis_mode == "standard") {
+    DATASET <- cclong
+    settings <- list(n.chains= 1,  n.adapt= 500, burnin = 4000, n.iter= 1000, thin=1) # around 1 hour - multicore
+}
+if (analysis_mode == "publication") {
+    DATASET <- cclong
+    settings <- list(n.chains= 4,  n.adapt= 500, burnin = 5000, n.iter= 5000, thin=1) # around 2 hours - multicore
+}
+
+```       
+
+# explore predictions
+```{r}
+source('jags/jags-data-model.r')
+model_specifications <- expand.grid(random_error = c(FALSE, TRUE), 
+                                    linear_quadratic = c(FALSE, TRUE), 
+                                    lag_effect =  c(FALSE, TRUE),
+                                    dv=c("pwi_mean", "pwi_mean_probit"),
+                                    stringsAsFactors=FALSE)
+model_specifications$id <- seq(nrow(model_specifications))
+model_specifications$name <- with(model_specifications, paste0(ifelse(random_error, "rerr", "ferr"), "_", 
+                                                               ifelse(lag_effect, "lagTR", "lagFA"), "_", 
+                                                               ifelse(linear_quadratic, "linquad", "int"), "_",
+                                                               dv))
+
+fit_jags_model2 <- function(i, dataset=DATASET, spec = model_specifications, ...) {
+    model_name <- spec[i, 'name']
+    print(model_name)
+    data <- get_data(dv=spec[i, 'dv'], data=dataset) # UPDATE cclong10 for final analysis
+    
+    script <- jags_model(random_error = spec[i, 'random_error'], 
+                         # lag = model_specifications[i, 'lag'], 
+                         linear_quadratic = spec[i, 'linear_quadratic'], 
+                         lag_effect = spec[i, 'lag_effect'],
+                         yhat=FALSE, deviance=TRUE, age_effect = TRUE)
+    agefit <- lm(y ~ age + I(age^2) + I(age^3),  data.frame(y=data$jagsdata$y, age=data$jagsdata$age))
+    
+    run_jags(script$script, data$jagsdata, "mu_y", dic.run=FALSE, 
+             inits = list(mu_beta_intercept = mean(data$jagsdata$y),
+                           sigma_fixed_y = mean(sapply(split(data$jagsdata$y, data$jagsdata$subject), sd)),
+                          mu_beta_sigma = log(mean(sapply(split(data$jagsdata$y, data$jagsdata$subject), sd))),
+                          mu_beta_lag = 0.2 ,    
+                          theta_age_linear = coef(agefit)['age'],
+                             theta_age_quadratic = coef(agefit)['I(age^2)'],
+                             theta_age_cubic = coef(agefit)['I(age^3)'] 
+                    ) , 
+             ...)
+}
+
+# lapply(as.list(seq(nrow(model_specifications))), function(X) fit_jags_model(X,  showplots=FALSE, showsamples=FALSE))
+cl <- makeCluster(detectCores() - 1, type="FORK", outfile="output/cluster-output.txt")
+mufits <- parLapply(cl, as.list(seq(nrow(model_specifications))), function(X) fit_jags_model2(X,  showplots=FALSE, showsamples=FALSE, n.chains=1))
+stopCluster(cl)
+names(mufits) <- model_specifications$name
+
+save(mufits, file="output/mufits.rdata")
+# load(file="output/mufits.rdata")
+```
+
+```{r eval=FALSE}
+# load(file="output/mufits.rdata")
+# DATASET <- cclong
+get_mean_mu <- function(X, FUN=mean) {
+    x <- t(as.matrix(X))
+    apply(x, 1, FUN)
+}
+
+
+sds <- lapply(mufits, function(X) get_mean_mu(X$samples, sd))
+mus <- lapply(mufits, function(X) get_mean_mu(X$samples))
+d <- get_data(dv='pwi_mean', data=DATASET)$Data # UPDATE cclong10 for final analysis
+d$yhat <- mus$ferr_lagFA_int_pwi_mean
+plot(yhat ~ y, data=d, xlim=c(3,10), ylim=c(3,10))
+abline(a=0, b=1)
+
+yhats <- do.call(cbind, mus)
+yhats <- data.frame(yhats)
+d <- cbind(d, yhats)
+
+d$res1 <- d$y - d$ferr_lagFA_int_pwi_mean
+d$res2 <- d$y - d$ferr_lagTR_int_pwi_mean
+mean(abs(d$res1))
+mean(abs(d$res2))
+
+sapply(d[,c('res1', 'res2')], function(X) sum(X^2)) # sums of squares
+sapply(d[,c('res1', 'res2')], function(X) mean(abs(X))) # mean absolute difference
+
+aggregate(res1 ~ time1, data=d, function(X) mean(abs(X)))
+aggregate(res2 ~ time1, data=d, function(X) mean(abs(X)))
+plot(density(d$res1))
+lines(density(d$res2), col="red")
+abline(v=0)
+
+plot(d$age, d$res1, pch=".")
+boxplot(res1~time1, d)
+par(mfrow=c(2,1))
+boxplot(res1~y, d)
+abline(h=0)
+boxplot(res2~y, d)
+abline(h=0)
+
+plot(d$res1, d$res2, pch=".")
+abline(a=0, b=1)
+plot(density(d$res1 - d$res2))
+
+round(cbind(sapply(sds, mean)), 2)
+cor(d$ferr_lagFA_int_pwi_mean, d$ferr_lagTR_int_pwi_mean)
+
+w10 <- rcases[rcases$waves_completed >= 10, "user_id"]
+w10 <- sample(w10, 25)
+plot(d[d$subjectid == 18530, c("time", "y")])
+plot(d[d$subjectid == 18530, c("time1", "y")])
+head(d)
+
+dw10 <- d[ d$subjectid %in% w10, ]
+xyplot(y~ time1 | factor(subjectid), 
+       dw10, type="l", auto.key=TRUE)
+
+xyplot(y + ferr_lagFA_int_pwi_mean + ferr_lagTR_int_pwi_mean~ time1 | factor(subjectid), 
+       dw10, type="l", auto.key=TRUE)
+xyplot(y + rerr_lagFA_int_pwi_mean + rerr_lagTR_int_pwi_mean~ time1 | factor(subjectid), 
+       dw10, type="l", auto.key=TRUE)
+
+xyplot(y + ferr_lagTR_int_pwi_mean ~ time1 | subjectid, dw10)
+
+dim(d)
+d1 <- cclong[,c("user_id", "time0", "pwi_mean", "wave_id")]
+dc <- cbind(d1, d)
+head(dc, 10)
+
+
+```
+

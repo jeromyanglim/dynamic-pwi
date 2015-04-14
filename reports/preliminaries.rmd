@@ -1,0 +1,166 @@
+# Initialise Project
+```{r setup}
+library(knitr)
+opts_knit$set(root.dir = normalizePath('../'))
+```
+
+```{r}
+if(basename(getwd()) == "reports") setwd("..") # necessary to work with projecttemplate
+library(ProjectTemplate); load.project()
+
+```             
+
+
+# Sample description
+```{r}
+nrow(rcases)
+nrow(cclong)
+table(rcases$gender_text)
+round(prop.table(table(rcases$gender_text)), 2)
+psych::describe(rcases$age_first_wave)
+psych::describe(rcases$waves_completed)
+psych::describe(rcases$date_first_wave)
+table(rcases$date_first_wave)
+psych::describe(rcases$date_first_wave)
+
+
+```
+
+
+# reliability and factor analysis
+```{r}
+times <- sort(unique(cclong$time0))
+alphas <- lapply(times, function(X) psych::alpha(cclong[ cclong$time0 %in% X ,v$pwi_items]))
+names(alphas) <- times
+alphas
+alphas_raw <- round(sapply(alphas, function(X)  X$total[,'raw_alpha']), 2)
+alphas_raw
+psych::describe(alphas_raw)
+
+
+table(table(cclong$user_id))
+aggregate(pwi_mean ~ time0, cclong, mean)
+aggregate(pwi_mean ~ time0, cclong, median)
+aggregate(pwi_mean ~ time0, cclong, mad)
+aggregate(pwi_mean ~ waves_completed, cclong[cclong$time0 == 0, ], mean)
+aggregate(pwi_mean ~ waves_completed, cclong[cclong$time0 == 0, ], sd)
+
+scree(cclong[ cclong$time0 == 0, v$pwi_items], 1)
+factanal(cclong[ cclong$time0 == 0, v$pwi_items], 1)
+
+multilevel::mult.icc(cclong[ ,c("pwi_mean", "gender"), drop=FALSE],  factor(cclong$user_id))
+```
+
+# descriptives
+```{r}
+cor(rcases$mean_pwi_mean, rcases$sd_pwi_mean)
+plot(rcases$mean_pwi_mean, rcases$sd_pwi_mean, pch=".")
+psych::describe(rcases[ c('mean_pwi_mean', 'sd_pwi_mean')])
+
+p <- ggplot(rcases, aes(x=mean_pwi_mean, y=sd_pwi_mean)) + 
+    geom_point(position=position_jitter(width=.1), size=1) + geom_smooth()
+p <- p + scale_x_continuous(name="PWI Person-Level Mean") +
+     scale_y_continuous(name="PWI Person-Level SD")
+p
+
+p <- ggplot(rcases, aes(x=sd_pwi_mean)) + scale_x_continuous(limits = c(0,3))
+p <- p + geom_histogram(binwidth=.05) + scale_x_continuous(name="PWI Person-Level SD")
+p
+
+
+```
+
+# histogram of well-being
+```{r}
+p1 <- ggplot(cclong, aes(x=pwi_mean)) + scale_x_continuous(limits = c(0,10))
+p1 <- p1 + geom_histogram(binwidth=.3)
+
+p2 <- ggplot(rcases, aes(x=mean_pwi_mean)) + scale_x_continuous(limits = c(0,10))
+p2 <- p2 + geom_histogram(binwidth=.3)
+
+grid.arrange(p1,p2, nrow=2)
+
+
+# probit transformed
+p1 <- ggplot(cclong, aes(x=pwi_mean_probit)) + scale_x_continuous(limits = c(-2,2))
+p1 <- p1 + geom_histogram(binwidth=.1)
+
+p2 <- ggplot(rcases, aes(x=mean_pwi_mean_probit)) + scale_x_continuous(limits = c(-2,2))
+p2 <- p2 + geom_histogram(binwidth=.1)
+
+grid.arrange(p1,p2, nrow=2)
+```
+
+# plot of well-being with age
+```{r}
+p <- ggplot(cclong, aes(x=age_est, y=pwi_mean)) + 
+    geom_point(position=position_jitter(width=.1), size=1) + geom_smooth()
+p <- p + scale_x_continuous(name="Age (years)") +
+     scale_y_continuous(name="PWI")
+p
+
+pdf("output/group-level-pwi.pdf", width = 10, height=8)
+p 
+dev.off()
+```
+
+# individual level plot
+```{r}
+set.seed(1234)
+sids <- sample(rcases[rcases$waves_completed == 10, 'user_id'], 36)
+cclong10 <- cclong[ cclong$user_id %in% sids, ]
+    
+p <- ggplot(cclong10, aes(time0, pwi_mean)) +  geom_point()
+# p <- p + geom_line(aes(x=trial, y=yhat, linetype=Model))
+p <- p + scale_y_continuous("PWI", limits=c(-0.5, 10.5)) + 
+    scale_x_continuous("Measurement occasion",  limits=c(-0.5, 9.5), breaks=c(0,1,2,3,4,5,6,7,8,9))
+p <- p + facet_wrap(~user_id, ncol=6) 
+p
+
+pdf(file="output/individual-plot.pdf", width=8, height=8)
+p
+dev.off()
+
+```
+
+# test retest correlations
+```{r}
+
+tempids5 <- rcases[ rcases$waves_completed >= 5, 'user_id']
+cclong5 <- reshape_simple(cclong[ cclong$user_id %in% tempids5, ], 'user_id', 'time0', 'pwi_mean')
+cclong5 <- cclong5[ , c("user_id", 0:4)]
+cors <- cor(cclong5[-1], use='pair')
+round(cors,2)
+nrow(cclong5)
+
+tempids7 <- rcases[ rcases$waves_completed >= 7, 'user_id']
+cclong5 <- reshape_simple(cclong[ cclong$user_id %in% tempids7, ], 'user_id', 'time0', 'pwi_mean')
+cclong5 <- cclong5[ , c("user_id", 0:6)]
+cors <- cor(cclong5[-1], use='pair')
+round(cors,2)
+nrow(cclong5)
+
+tempids9 <- rcases[ rcases$waves_completed >= 9, 'user_id']
+cclong5 <- reshape_simple(cclong[ cclong$user_id %in% tempids9, ], 'user_id', 'time0', 'pwi_mean')
+cclong5 <- cclong5[ , c("user_id", 0:8)]
+cors <- cor(cclong5[-1], use='pair', method="pearson")
+length(tempids9)
+write.csv(cors, file="output/cors_testretest.csv")
+round(cors,2)
+nrow(cclong5)
+
+
+head(cclong)
+
+head(split(clong[,c( "time0", "wave")], clong$user_id))
+head(split(cclong[,c( "time0", "wave")], cclong$user_id))
+
+
+```
+
+
+
+
+
+
+
