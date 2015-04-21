@@ -177,7 +177,7 @@ plot_subset <- function(subset, filename="output/individual-fits.pdf") {
 
 set.seed(1234)
 w10 <- rcases[rcases$waves_completed >= 9, "user_id"]
-w10 <- sample(w10, 30)
+w10 <- sample(w10, 48)
 # debugonce(plot_subset)
 plot_subset(subset = w10)
 dim(yhd)

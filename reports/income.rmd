@@ -1,0 +1,54 @@
+```{r}
+if(basename(getwd()) == "reports") setwd("..") # necessary to work with projecttemplate
+library(ProjectTemplate); load.project()
+```     
+
+```{r}
+# income: income category
+
+head(cclong)
+
+cclong$income_text
+sapply(cclong[,v$demographics], function(X) table(X, useNA="always"))
+cclong[,v$demographics], function(X) table(X, useNA="always"))
+```
+
+```{r}
+table(cclong$wave, cclong$income)
+table( cclong$income_text, cclong$wave)
+table(cclong$income_text, cclong$income)
+```
+
+```{r}
+p <- ggplot(cclong, aes(x=age_est, y=income)) + 
+    geom_point(position=position_jitter(width=.1), size=1) + geom_smooth()
+p <- p + scale_x_continuous(name="Age (years)") +
+     scale_y_continuous(name="income")
+p
+
+p1 <- ggplot(cclong, aes(x=income)) + scale_x_continuous(limits = c(0,10))
+p1 + geom_histogram(binwidth=.3)
+
+sids <- sample(rcases[rcases$waves_completed == 10, 'user_id'], 36)
+cclong10 <- cclong[ cclong$user_id %in% sids, ]
+    
+p <- ggplot(cclong10, aes(time0, income)) +  geom_point()
+# p <- p + geom_line(aes(x=trial, y=yhat, linetype=Model))
+p <- p + scale_y_continuous("income", limits=c(0, 7)) + 
+    scale_x_continuous("Measurement occasion",  limits=c(-0.5, 9.5), breaks=c(0,1,2,3,4,5,6,7,8,9))
+p <- p + facet_wrap(~user_id, ncol=6) 
+p
+
+
+# income and pwi
+p <- ggplot(cclong, aes(x=income, y=pwi_mean)) + 
+    geom_point(position=position_jitter(width=.1), size=1) + geom_smooth()
+p <- p + scale_x_continuous(name="Income") +
+     scale_y_continuous(name="PWI")
+p
+
+
+
+```
+
+

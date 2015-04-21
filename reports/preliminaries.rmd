@@ -49,6 +49,8 @@ scree(cclong[ cclong$time0 == 0, v$pwi_items], 1)
 factanal(cclong[ cclong$time0 == 0, v$pwi_items], 1)
 
 multilevel::mult.icc(cclong[ ,c("pwi_mean", "gender"), drop=FALSE],  factor(cclong$user_id))
+
+mean(rcases$mean_pwi_mean > 5)
 ```
 
 # descriptives
@@ -72,23 +74,33 @@ p
 
 # histogram of well-being
 ```{r}
-p1 <- ggplot(cclong, aes(x=pwi_mean)) + scale_x_continuous(limits = c(0,10))
-p1 <- p1 + geom_histogram(binwidth=.3)
+plotpwidist <- function(data=cclong, x = "pwi_mean", label = "PWI Mean" , limits = c(0,10), binwidth=.3) {
+    p <- ggplot(data, aes_string(x=x)) + scale_x_continuous(label, limits = limits) + scale_y_continuous("Count")
+    p <- p + geom_histogram(binwidth=binwidth)
+    p
+}
 
-p2 <- ggplot(rcases, aes(x=mean_pwi_mean)) + scale_x_continuous(limits = c(0,10))
-p2 <- p2 + geom_histogram(binwidth=.3)
+plist <- list()
+plist$p1 <- plotpwidist(cclong, "pwi_mean", "Raw PWI Scores", c(0,10), .3)
+plist$p2 <- plotpwidist(rcases, "mean_pwi_mean", "Person-Level Means of \nRaw PWI Scores", c(0,10), .2)
+plist$p3 <- plotpwidist(cclong, "residual_pwi_mean", "Probit PWI Deviations from \nRaw Person-Level Means", c(-5,5), .3)
+plist$p4 <- plotpwidist(cclong, "stdresidual_pwi_mean", "Probit PWI Std Deviations from \nRaw Person-Level Means", c(-3,3), .1)
 
-grid.arrange(p1,p2, nrow=2)
+plist$p5 <- plotpwidist(cclong, "pwi_mean_probit", "Probit PWI Scores", c(-2,2), .15)
+plist$p6 <- plotpwidist(rcases, "mean_pwi_mean_probit", "Person-Level Means of \nProbit PWI Scores", c(-2,2), .05)
+plist$p7 <- plotpwidist(cclong, "residual_pwi_mean_probit", "Probit PWI Deviations from \nProbit Person-Level Means", c(-1.5,1.5), .05)
+plist$p8 <- plotpwidist(cclong, "stdresidual_pwi_mean_probit", "Probit PWI Std Deviations from \nProbit Person-Level Means", c(-3, 3), .1)
 
+grid.arrange(plist$p1, plist$p2, plist$p3, plist$p4 ,
+             plist$p5, plist$p6, plist$p7, plist$p8,
+             nrow=2, ncol=4)
 
-# probit transformed
-p1 <- ggplot(cclong, aes(x=pwi_mean_probit)) + scale_x_continuous(limits = c(-2,2))
-p1 <- p1 + geom_histogram(binwidth=.1)
+pdf("output/histplot.pdf", width = 11, height=8)
+grid.arrange(plist$p1, plist$p2, plist$p3, plist$p4 ,
+             plist$p5, plist$p6, plist$p7, plist$p8,
+             nrow=2, ncol=4)
 
-p2 <- ggplot(rcases, aes(x=mean_pwi_mean_probit)) + scale_x_continuous(limits = c(-2,2))
-p2 <- p2 + geom_histogram(binwidth=.1)
-
-grid.arrange(p1,p2, nrow=2)
+dev.off()
 ```
 
 # plot of well-being with age
@@ -159,6 +171,50 @@ head(split(cclong[,c( "time0", "wave")], cclong$user_id))
 ```
 
 
+# ABS age statistics
+```{r}
+names(absage) <- gsub("Estimated.Resident.Population....", "", names(absage))
+names(absage) <- gsub("....", "_", names(absage), fixed=TRUE)
+names(absage) <- gsub("..", "", names(absage), fixed=TRUE)
+names(absage) <- gsub("100.and.over", "101", names(absage), fixed=TRUE)
+
+absyear <- absage[absage$date == "Jun-2004", ]
+absyear <- t(absyear[,grep("Persons", names(absyear))])
+absyear <- data.frame(absyear)
+names(absyear) <- c("count")
+absyear$age <- sapply(strsplit(row.names(absyear), "_"), function(X) X[2])
+absyear$age <- as.numeric(absyear$age)
+
+absyear$count_by_age <- absyear$count * absyear$age
+# check population size against expectations
+# sum(absyear$count) / 10^6
+
+# mean adult age
+absyear_adult <- absyear[ absyear$age >= 18, ]
+absyear_adult$prop <- absyear_adult$count / sum(absyear_adult$count)
+mean_age <- sum(absyear_adult$count_by_age) / sum(absyear_adult$count)
+
+absyear_adult$age_squared_deviation <- (absyear_adult$age - mean_age)^2
+
+sd_age <- sqrt(sum(absyear_adult$count * absyear_adult$age_squared_deviation) /
+                   sum(absyear_adult$count))
+
+mean_age
+sd_age
+
+```
+
+# Is year to year stability different with age
+```{r}
+
+cclong$age_cat <- cut_number(cclong$age_est, 8)
+table(cclong$age_cat)
+sc <- split(cclong, cclong$age_cat)
+X <- sc[[1]]
+sapply(sc, function(X)  multilevel::mult.icc( X[ ,c("pwi_mean", "gender"), drop=FALSE] ,  factor(X[ ,"user_id"]))[1,"ICC1"])
+
+
+```
 
 
 
