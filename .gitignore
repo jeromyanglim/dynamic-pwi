@@ -7,3 +7,8 @@ cache/*
 raw-data/*
 output/*
 makefile
+bayesian-figures.md
+bayesian-models.md
+bayesian-ppc.md
+figure
+mu_y.md
