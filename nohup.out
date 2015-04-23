@@ -1,3928 +1,0 @@
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The job has run." | mail -s "Job 1" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The job has run." | mail -s "Job 1" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-  |                                                                         |........................................................         |  86%
-label: ppcs
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-ppc.md
-
-[1] "bayesian-ppc.md"
-echo "The PPC was run." | mail -s "PPC ob" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-sigma_fixed_y  |                                                                         |........................................................         |  86%
-label: ppcs
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-ppc.md
-
-[1] "bayesian-ppc.md"
-echo "The PPC was run." | mail -s "PPC ob" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-  |                                                                         |........................................................         |  86%
-label: ppcs
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-ppc.md
-
-[1] "bayesian-ppc.md"
-echo "The PPC was run." | mail -s "PPC ob" jeromy@deakin.edu.au
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-  |                                                                         |........................................................         |  86%
-label: ppcs
-make: *** [ppc] Terminated
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-  |                                                                         |........................................................         |  86%
-label: ppcs
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-ppc.md
-
-[1] "bayesian-ppc.md"
-echo "The PPC was run." | mail -s "PPC ob" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'publication'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/mu_y.rmd')"
-
-
-processing file: reports/mu_y.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.......                                                          |  11%
-  ordinary text without R code
-
-  |                                                                         |..............                                                   |  22%
-label: setup
-  |                                                                         |......................                                           |  33%
-  ordinary text without R code
-
-  |                                                                         |.............................                                    |  44%
-label: unnamed-chunk-1
-  |                                                                         |....................................                             |  56%
-  ordinary text without R code
-
-  |                                                                         |...........................................                      |  67%
-label: unnamed-chunk-2
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |...................................................              |  78%
-  ordinary text without R code
-
-  |                                                                         |..........................................................       |  89%
-label: unnamed-chunk-3 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: mu_y.md
-
-[1] "mu_y.md"
-echo "standard yhat job" | mail -s "yhat job" jeromy@deakin.edu.au 
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-models.rmd')"
-
-
-processing file: reports/bayesian-models.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: main_models
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-ppc.rmd')"
-
-
-processing file: reports/bayesian-ppc.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |.........                                                        |  14%
-  ordinary text without R code
-
-  |                                                                         |...................                                              |  29%
-label: setup
-  |                                                                         |............................                                     |  43%
-  ordinary text without R code
-
-  |                                                                         |.....................................                            |  57%
-label: load_data (with options) 
-List of 1
- $ message: logi FALSE
-
-Loading project configuration
-Autoloading helper functions
- Running helper script: additional-functions.r
- Running helper script: data-cleaning.r
- Running helper script: data-override.R
- Running helper script: helpers.R
- Running helper script: jags-functions.r
-Autoloading packages
- Loading package: psych
-Loading required package: psych
- Loading package: lattice
-Loading required package: lattice
- Loading package: Hmisc
-Loading required package: Hmisc
-Loading required package: methods
-Loading required package: grid
-Loading required package: survival
-Loading required package: splines
-Loading required package: Formula
-Loading required package: ggplot2
-
-Attaching package: 'ggplot2'
-
-The following object is masked from 'package:psych':
-
-    %+%
-
-
-Attaching package: 'Hmisc'
-
-The following object is masked from 'package:psych':
-
-    describe
-
-The following objects are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
- Loading package: foreign
-Loading required package: foreign
- Loading package: multilevel
-Loading required package: multilevel
-Loading required package: nlme
-Loading required package: MASS
- Loading package: personalityfacets
-Loading required package: personalityfacets
-Loading required package: boot
-
-Attaching package: 'boot'
-
-The following object is masked from 'package:survival':
-
-    aml
-
-The following object is masked from 'package:lattice':
-
-    melanoma
-
-The following object is masked from 'package:psych':
-
-    logit
-
-Loading required package: bootstrap
-Loading required package: hypergeo
- Loading package: rjags
-Loading required package: rjags
-Loading required package: coda
-Linked to JAGS 3.4.0
-Loaded modules: basemod,bugs
- Loading package: ggplot2
- Loading package: car
-Loading required package: car
-
-Attaching package: 'car'
-
-The following object is masked from 'package:boot':
-
-    logit
-
-The following object is masked from 'package:psych':
-
-    logit
-
- Loading package: magrittr
-Loading required package: magrittr
- Loading package: gridExtra
-Loading required package: gridExtra
- Loading package: parallel
-Loading required package: parallel
-Autoloading data
- Loading data set: clong
- Loading data set: meta
-Loading required namespace: gdata
-Munging data
- Running preprocessing script: 01-munge.R
-  |                                                                         |..............................................                   |  71%
-  ordinary text without R code
-
-  |                                                                         |........................................................         |  86%
-label: ppcs
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-1 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: updated_analysis
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-models.md
-
-[1] "bayesian-models.md"
-echo "The main job has run." | mail -s "Main Job" jeromy@deakin.edu.au
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-ppc.md
-
-[1] "bayesian-ppc.md"
-echo "The PPC was run." | mail -s "PPC ob" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-figures.rmd')"
-
-
-processing file: reports/bayesian-figures.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: unnamed-chunk-1
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: unnamed-chunk-2
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-3
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: unnamed-chunk-4 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-figures.md
-
-[1] "bayesian-figures.md"
-echo "The standard figures." | mail -s "Standard figures job" jeromy@deakin.edu.au
-Rscript -e "library(knitr); analysis_mode = 'standard'; knit('reports/bayesian-figures.rmd')"
-
-
-processing file: reports/bayesian-figures.rmd
-  |                                                                         |                                                                 |   0%  |                                                                         |......                                                           |   9%
-  ordinary text without R code
-
-  |                                                                         |............                                                     |  18%
-label: setup
-  |                                                                         |..................                                               |  27%
-  ordinary text without R code
-
-  |                                                                         |........................                                         |  36%
-label: unnamed-chunk-1
-  |                                                                         |..............................                                   |  45%
-  ordinary text without R code
-
-  |                                                                         |...................................                              |  55%
-label: unnamed-chunk-2
-  |                                                                         |.........................................                        |  64%
-  ordinary text without R code
-
-  |                                                                         |...............................................                  |  73%
-label: unnamed-chunk-3
-  |                                                                         |.....................................................            |  82%
-  ordinary text without R code
-
-  |                                                                         |...........................................................      |  91%
-label: unnamed-chunk-4 (with options) 
-List of 1
- $ eval: logi FALSE
-
-  |                                                                         |.................................................................| 100%
-  ordinary text without R code
-
-
-output file: bayesian-figures.md
-
-[1] "bayesian-figures.md"
-echo "The standard figures." | mail -s "Standard figures job" jeromy@deakin.edu.au
