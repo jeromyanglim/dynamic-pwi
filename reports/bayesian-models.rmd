@@ -140,6 +140,32 @@ write.csv(dic_table, file="output/dic_table.csv")
 
 ```
 
+```{r}
+parameters <- read.csv(file="output/parameter_estimates.csv")
+
+unique(parameters$predictor)
+parnames <- c("mu_beta_intercept",  "mu_beta_sigma", "mean_sigma_y",
+              "sigma_beta_intercept", "sigma_beta_linear", "sigma_beta_quadratic", "sigma_beta_sigma",  "sd_sigma_y", 
+              "rho_14",
+              "theta_age_linear",  "theta_age_quadratic", "theta_age_cubic" )
+modelnames <- c("rerr_lagFA_int_pwi_mean", "rerr_lagFA_linquad_pwi_mean",
+                "rerr_lagFA_int_pwi_mean_probit", "rerr_lagFA_linquad_pwi_mean_probit")
+coeftable <- data.frame(id = seq(parnames), predictor = parnames)
+i <- 1
+
+create_specific_coef_table <- function(model) {
+    modpred <- parameters[ parameters$name == model &  parameters$predictor %in% parnames, ]
+    specific_coeftable <- merge(coeftable, modpred, all.x=TRUE, sort=FALSE)
+    specific_coeftable <- specific_coeftable[ order(specific_coeftable$id), ]
+    specific_coeftable
+}
+
+combtable <- lapply(modelnames, function(X) create_specific_coef_table(X))
+combtable <- do.call(rbind, combtable)
+write.csv(combtable, file="output/core_parameters.csv", na="")
+
+```
+
 # explore model fits
 ```{r eval=FALSE}
 # load(file="output/model-fits.rdata")

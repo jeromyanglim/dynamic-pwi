@@ -151,7 +151,6 @@ source("lib/extract-parameters.R")
 # DATASET <- cclong
 # step 1 get yhat 
 # Step 2 merge yhat into cctrials
-modelfit$rerr_lagFA_int_pwi_mean_probit$data$
 
 
 # yhats <- modelfit$samples
@@ -165,10 +164,7 @@ merge_yhats <- function(model) {
     yhv$combined <- data.frame(yhat_mean=yhv$mean[,2], yhat_lower=yhv$lower[,2], yhat_upper = yhv$upper  [,2])
     yhv$combined$observationid <-  model$data$observationid
     
-    temp <- merge(yhv$combined, DATASET, by.x='observationid', by.y="wave_id")
-    DATASET$wave_id
-    
-
+    merge(yhv$combined, DATASET, by.x='observationid', by.y="wave_id")
 }
 
 plot_subset <- function(subset, plot_title="") {
@@ -194,6 +190,7 @@ w10 <- sample(w10, 24)
 # debugonce(plot_subset)
 
 pcomb <- list()
+# debugonce(merge_yhats)
 yhd <- merge_yhats(modelfit$rerr_lagFA_int_pwi_mean_probit)
 pcomb$rerr_lagFA_int_pwi_mean_probit <- plot_subset(subset = w10, plot_title = "(a) Random Intercept")
 
