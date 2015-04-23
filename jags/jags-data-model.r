@@ -129,8 +129,8 @@ for (i in 1:N) {
         #$(FIXED_ERROR) tausq_fixed_y)
 
         #$(YPRED) ypred_raw[index[i,j]] ~ dnorm(mu_y[index[i, j]], 
-            #$(RANDOM_ERROR)   tausq_y[i])
-            #$(FIXED_ERROR) tausq_fixed_y)
+        #$(YPRED)    #$(RANDOM_ERROR)   tausq_y[i])
+        #$(YPRED)    #$(FIXED_ERROR) tausq_fixed_y)
         #$(YPRED) #$(UNTRANSFORMED)  ypred[index[i,j]]  <- ypred_raw[index[i,j]]
         #$(YPRED) #$(TRANSFORMED) ypred[index[i,j]]  <- ( phi(ypred_raw[index[i,j]]) * 11 ) - 0.5
 

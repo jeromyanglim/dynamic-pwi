@@ -34,7 +34,7 @@ if (analysis_mode == "standard") {
 }
 if (analysis_mode == "publication") {
     DATASET <- cclong
-    settings <- list(n.chains= 1,  n.adapt= 1000, burnin = 5000, n.iter= 10000, thin=10)
+    settings <- list(n.chains= 1,  n.adapt= 1000, burnin = 5000, n.iter= 25000, thin=50)
 }
 ```
 
@@ -73,7 +73,6 @@ fit_ppc_models <- function(i, data=DATASET) {
                         transformed = ppc_specifications[i, "transformed"])
     
     agefit <- lm(y ~ age + I(age^2) + I(age^3),  data.frame(y=jagsdata$jagsdata$y, age=jagsdata$jagsdata$age))
-    
     posterior_predictive_check_pwi(jagsmodel=script$script, 
                                     jagsdata = jagsdata$jagsdata,
                                     rawdata = jagsdata$Data,
@@ -87,6 +86,7 @@ fit_ppc_models <- function(i, data=DATASET) {
                              theta_age_cubic = coef(agefit)['I(age^3)'] 
                     ))
 }
+
 
 # test <- lapply(as.list(seq(nrow(ppc_specifications))), function(X) fit_ppc_models(X))
 # predictive_checks <-  lapply(as.list(seq(nrow(ppc_specifications))), function(X) fit_ppc_models(X))

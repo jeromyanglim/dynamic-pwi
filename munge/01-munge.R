@@ -22,6 +22,7 @@ v$pwiall <- c(v$gls, "pwi_mean", v$pwi_items)
 
 # add wave information 
 clong <- merge(clong, meta.waves[,c('wave', 'year', 'month')])
+clong$wave_id <- clong$user_id * 1000 + clong$wave # fix original wave id
 
 # merge content and contented
 clong$content <- ifelse(!is.na(clong$content), clong$content, clong$contented)
