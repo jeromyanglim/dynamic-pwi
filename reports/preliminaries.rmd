@@ -22,8 +22,6 @@ psych::describe(rcases$waves_completed)
 psych::describe(rcases$date_first_wave)
 table(rcases$date_first_wave)
 psych::describe(rcases$date_first_wave)
-
-
 ```
 
 
@@ -68,8 +66,6 @@ p
 p <- ggplot(rcases, aes(x=sd_pwi_mean)) + scale_x_continuous(limits = c(0,3))
 p <- p + geom_histogram(binwidth=.05) + scale_x_continuous(name="PWI Person-Level SD")
 p
-
-
 ```
 
 # histogram of well-being
@@ -81,15 +77,15 @@ plotpwidist <- function(data=cclong, x = "pwi_mean", label = "PWI Mean" , limits
 }
 
 plist <- list()
-plist$p1 <- plotpwidist(cclong, "pwi_mean", "Raw PWI Scores", c(0,10), .3)
-plist$p2 <- plotpwidist(rcases, "mean_pwi_mean", "Person-Level Means of \nRaw PWI Scores", c(0,10), .2)
-plist$p3 <- plotpwidist(cclong, "residual_pwi_mean", "Probit PWI Deviations from \nRaw Person-Level Means", c(-5,5), .3)
-plist$p4 <- plotpwidist(cclong, "stdresidual_pwi_mean", "Probit PWI Std Deviations from \nRaw Person-Level Means", c(-3,3), .1)
+plist$p1 <- plotpwidist(cclong, "pwi_mean", "Raw SWB Scores", c(0,10), .3)
+plist$p2 <- plotpwidist(rcases, "mean_pwi_mean", "Person-Level Means of \nRaw SWB Scores", c(0,10), .2)
+plist$p3 <- plotpwidist(cclong, "residual_pwi_mean", "Raw SWB Deviations from \nRaw Person-Level Means", c(-5,5), .3)
+plist$p4 <- plotpwidist(cclong, "stdresidual_pwi_mean", "Raw SWB Z Deviations from \nRaw Person-Level Means", c(-3,3), .1)
 
-plist$p5 <- plotpwidist(cclong, "pwi_mean_probit", "Probit PWI Scores", c(-2,2), .15)
-plist$p6 <- plotpwidist(rcases, "mean_pwi_mean_probit", "Person-Level Means of \nProbit PWI Scores", c(-2,2), .05)
-plist$p7 <- plotpwidist(cclong, "residual_pwi_mean_probit", "Probit PWI Deviations from \nProbit Person-Level Means", c(-1.5,1.5), .05)
-plist$p8 <- plotpwidist(cclong, "stdresidual_pwi_mean_probit", "Probit PWI Std Deviations from \nProbit Person-Level Means", c(-3, 3), .1)
+plist$p5 <- plotpwidist(cclong, "pwi_mean_probit", "Probit SWB Scores", c(-2,2), .15)
+plist$p6 <- plotpwidist(rcases, "mean_pwi_mean_probit", "Person-Level Means of \nProbit SWB Scores", c(-2,2), .05)
+plist$p7 <- plotpwidist(cclong, "residual_pwi_mean_probit", "Probit SWB Deviations from \nProbit Person-Level Means", c(-1.5,1.5), .05)
+plist$p8 <- plotpwidist(cclong, "stdresidual_pwi_mean_probit", "Probit SWB Z Deviations from \nProbit Person-Level Means", c(-3, 3), .1)
 
 grid.arrange(plist$p1, plist$p2, plist$p3, plist$p4 ,
              plist$p5, plist$p6, plist$p7, plist$p8,
@@ -206,14 +202,11 @@ sd_age
 
 # Is year to year stability different with age
 ```{r}
-
 cclong$age_cat <- cut_number(cclong$age_est, 8)
 table(cclong$age_cat)
 sc <- split(cclong, cclong$age_cat)
 X <- sc[[1]]
 sapply(sc, function(X)  multilevel::mult.icc( X[ ,c("pwi_mean", "gender"), drop=FALSE] ,  factor(X[ ,"user_id"]))[1,"ICC1"])
-
-
 ```
 
 

@@ -118,7 +118,7 @@ rcases <- merge(rcases, val_gen, all.x=TRUE)
 
 # get age estimate
 cclong$est_dob <- cclong$year_month - cclong$age + .5
-temp <- aggregate(cclong$est_dob, list(user_id=cclong$user_id), median, na.rm=TRUE)
+temp <- aggregate(cclong$est_dob, list(user_id = cclong$user_id), median, na.rm=TRUE)
 names(temp) <- c("user_id", "dob")
 rcases <- merge(rcases, temp)
 
@@ -146,15 +146,10 @@ temp <- aggregate(pwi_mean ~ user_id, cclong, mean)
 names(temp) <- c("user_id", "mean_pwi_mean")
 rcases <- merge(rcases, temp)
 
-
-
 temp <- aggregate(pwi_mean ~ user_id, cclong, sd)
 names(temp) <- c("user_id", "sd_pwi_mean")
 rcases <- merge(rcases, temp)
 
-
-# remove cases where first wave was after 2011
-rcases <- rcases[ rcases$date_first_wave < 2011, ]
 
 # remove cases where age is far from prediction
 cclong <- cclong[!(abs(cclong$ageraw - cclong$age_est) > 3) %in% TRUE, ]
@@ -179,8 +174,9 @@ temp <- aggregate(pwi_mean_probit ~ user_id, cclong, mean)
 names(temp) <- c("user_id", "mean_pwi_mean_probit")
 rcases <- merge(rcases, temp)
 
-
-
+temp <- aggregate(pwi_mean_probit ~ user_id, cclong, sd)
+names(temp) <- c("user_id", "sd_pwi_mean_probit")
+rcases <- merge(rcases, temp)
 
 
 # recreate a time0 version (i.e., first wave is 0)
@@ -195,8 +191,12 @@ rcases$waves_completed <- rcases$waves_completed2
 rcases$waves_completed2 <- NULL
 
 
-
-
+cclong <- merge(cclong, rcases[,c("user_id", "mean_pwi_mean", "mean_pwi_mean_probit", 
+                                  "sd_pwi_mean", "sd_pwi_mean_probit")], all.x = TRUE)
+cclong$residual_pwi_mean <- cclong$pwi_mean - cclong$mean_pwi_mean
+cclong$stdresidual_pwi_mean <- cclong$residual_pwi_mean / cclong$sd_pwi_mean
+cclong$residual_pwi_mean_probit <- cclong$pwi_mean_probit - cclong$mean_pwi_mean_probit
+cclong$stdresidual_pwi_mean_probit <- cclong$residual_pwi_mean_probit / cclong$sd_pwi_mean_probit
 
 
 
