@@ -24,6 +24,34 @@ table(rcases$date_first_wave)
 psych::describe(rcases$date_first_wave)
 ```
 
+# Comparison
+```{r}
+temp1 <- aggregate(pwi_mean ~ user_id, clong, mean)
+temp2 <- aggregate(pwi_mean ~ user_id, clong, length)
+names(temp2) <- c("user_id", "nobs")
+comb <- merge(temp1, temp2)
+comb <- comb[comb$nobs > 1, ]
+comb$gt4 <- comb$nob > 4
+
+round(aggregate(pwi_mean ~ nobs, comb, mean), 2)
+aggregate(pwi_mean ~ nobs, comb, sd)
+aggregate(pwi_mean ~ nobs, comb, length)
+summary(lm(pwi_mean ~ factor(nobs), comb))
+aggregate(pwi_mean ~ gt4, comb, mean)
+
+aggregate(pwi_mean ~ gt4, comb, sd)
+# d
+.1 / sd(comb$pwi_mean)
+
+
+bcases <- clong[clong$time0 == 0), ]
+bcases <- merge(bcases, comb[,c("user_id", "nobs", "gt4")])
+prop.table(table(bcases$gender, bcases$gt4), 2)
+aggregate(age ~ gt4, bcases, mean)
+
+```
+
+
 
 # reliability and factor analysis
 ```{r}

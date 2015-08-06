@@ -11,7 +11,7 @@ library(ProjectTemplate); load.project()
 source('jags/jags-data-model.r')
 
 # create test dataset
-w10 <- rcases[rcases$waves_completed >= 10, "user_id"]
+w10 <- rcases[rcases$waves_completed >= 9, "user_id"]
 w10 <- sample(w10, 30)
 cclong10 <- cclong[ cclong$user_id %in% w10, ]
 
@@ -35,7 +35,7 @@ if (analysis_mode == "standard") {
 }
 if (analysis_mode == "publication") {
     DATASET <- cclong
-    settings <- list(n.chains= 4,  n.adapt= 500, burnin = 5000, n.iter= 25000, thin=20) # around 8 hours - multicore
+    settings <- list(n.chains= 4,  n.adapt= 500, burnin = 5000, n.iter= 5000, thin=1) # around 2 hours - multicore
 }
 
 
@@ -84,21 +84,11 @@ fityhat_jags_model <- function(i, dataset=DATASET, spec = model_specifications, 
              ...)
 }
 
-
-modelfit <- list()
-getid <- which(model_specifications$random_error == TRUE & 
+modelfit <- fityhat_jags_model( which(model_specifications$random_error == TRUE & 
               model_specifications$lag_effect == FALSE &
               model_specifications$linear_quadratic == FALSE & 
-              model_specifications$dv == "pwi_mean_probit")
-modelfit[[model_specifications[getid, "name"]]] <- fityhat_jags_model(getid)
-
-getid <- which(model_specifications$random_error == TRUE & 
-              model_specifications$lag_effect == FALSE &
-              model_specifications$linear_quadratic == TRUE & 
-              model_specifications$dv == "pwi_mean_probit")
-modelfit[[model_specifications[getid, "name"]]] <- fityhat_jags_model(getid)
-
-
+              model_specifications$dv == "pwi_mean_probit"))
+yhats <- modelfit$samples
 save(modelfit, file = "output/yhats-individual.rdata")
 ```
 
@@ -138,14 +128,13 @@ p
 pdf("output/group-level-pwi.pdf", width = 10, height=8)
 p 
 dev.off()
-
-
-
 ```
 
 
+
+
 # Individual level plot
-```{r, eval = FALSE}
+```{r}
 source("lib/extract-parameters.R")
 # load("output/yhats-individual.rdata")
 # DATASET <- cclong
@@ -163,7 +152,7 @@ merge_yhats <- function(model) {
     yhv$upper <- extract_parameter(yhats, "ypred", function(X) quantile(X, .975))
     yhv$combined <- data.frame(yhat_mean=yhv$mean[,2], yhat_lower=yhv$lower[,2], yhat_upper = yhv$upper  [,2])
     yhv$combined$observationid <-  model$data$observationid
-    
+
     merge(yhv$combined, DATASET, by.x='observationid', by.y="wave_id")
 }
 
@@ -171,7 +160,7 @@ plot_subset <- function(subset, plot_title="") {
     yhds <- yhd[ yhd$user_id %in% subset, ]   
     yhds <- yhds[ order(yhds$observationid, yhds$time0), ]
     # lapply(subset, function(i) with(yhds[yhds$user_id %in% i, ], cbind(time0, age_est)))
-    
+
     p <- ggplot(yhds, aes(time0, pwi_mean)) + geom_point() 
     p <- p + geom_line(aes(x=time0, y=yhat_mean))
     p <- p   + scale_y_continuous("Subjective Well-Being (0 - 10)", limits=c(-0.5, 10.5)) + 
@@ -186,7 +175,7 @@ plot_subset <- function(subset, plot_title="") {
 set.seed(1234)
 w10 <- rcases[rcases$waves_completed >= 10, "user_id"]
 length(w10)
-w10 <- sample(w10, 24)
+w10 <- sample(w10, 15)
 # debugonce(plot_subset)
 
 pcomb <- list()
@@ -200,10 +189,8 @@ pcomb$rerr_lagFA_linquad_pwi_mean_probit <- plot_subset(subset = w10, plot_title
 
 grid.arrange(pcomb$rerr_lagFA_int_pwi_mean_probit, pcomb$rerr_lagFA_linquad_pwi_mean_probit, ncol=2)
 
-pdf(file="output/individual-fits.pdf", width=10, height=10)
+pdf(file="output/individual-fits.pdf", width=10, height=8)
 grid.arrange(pcomb$rerr_lagFA_int_pwi_mean_probit, pcomb$rerr_lagFA_linquad_pwi_mean_probit, ncol=2)
 dev.off()
 
-
 ```
-
